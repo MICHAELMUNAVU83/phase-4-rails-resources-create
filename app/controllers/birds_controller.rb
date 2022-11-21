@@ -16,4 +16,13 @@ class BirdsController < ApplicationController
     end
   end
 
+  def create
+    bird = Bird.new(bird_params)
+    if bird.save
+      render json: bird, status: :created, location: bird
+    else
+      render json: bird.errors, status: :unprocessable_entity
+    end
+  end
+
 end
